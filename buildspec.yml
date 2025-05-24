@@ -3,17 +3,20 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 18
     commands:
+      - echo "Installing dependencies..."
       - npm install
 
   build:
     commands:
+      - echo "Starting build process..."
+      - set -x
       - npm run build
 
   post_build:
     commands:
-      - echo "Build completed on `date`"
+      - echo "Build completed on $(date)"
       - echo "Artifacts copied from /build"
 
 artifacts:
