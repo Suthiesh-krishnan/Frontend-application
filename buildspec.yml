@@ -3,28 +3,20 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 18
+      nodejs: 14
     commands:
-      - echo "Installing dependencies..."
       - npm install
 
   build:
     commands:
-      - echo "Starting build with verbose output..."
-      - set -x
       - npm run build
 
   post_build:
     commands:
-      - echo "Build completed on $(date)"
-      - |
-        if [ -d scripts ]; then
-          cp -r scripts/ build/
-        else
-          echo "Warning: scripts/ directory not found, skipping copy."
-        fi
+      - echo "Build completed on `date`"
+      - echo "Artifacts copied from /build"
 
 artifacts:
+  base-directory: build
   files:
     - '**/*'
-  base-directory: build
