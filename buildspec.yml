@@ -3,7 +3,7 @@ version: 0.2
 phases:
   install:
     runtime-versions:
-      nodejs: 14
+      nodejs: 18
     commands:
       - npm install
 
@@ -14,10 +14,9 @@ phases:
   post_build:
     commands:
       - echo "Build completed on `date`"
-      - echo "Artifacts copied from /build and /scripts"
+      - cp -r scripts/ build/
 
 artifacts:
   files:
     - '**/*'
-    - ../scripts/**
   base-directory: build
