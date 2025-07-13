@@ -7,7 +7,7 @@ WORKDIR /app
 COPY package.json package-lock.json ./
 RUN npm install
 
-# Copy the source code
+# Copy the rest of the source code
 COPY . .
 
 # Build the React app
@@ -16,11 +16,11 @@ RUN npm run build
 # Step 2: Serve the app using NGINX
 FROM nginx:alpine
 
-# Copy the built React app to NGINX's directory
+# Copy the built React app to NGINX's default HTML directory
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose port 80
-EXPOSE 3000
+# Expose correct port (NGINX uses 80)
+EXPOSE 80
 
-# Run NGINX to serve the app
+# Start NGINX in the foreground
 CMD ["nginx", "-g", "daemon off;"]
