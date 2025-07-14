@@ -16,27 +16,17 @@ RUN npm run build
 # Step 2: Serve the app using NGINX
 FROM nginx:alpine
 
-<<<<<<< HEAD
-# Remove default config if needed (optional)
+# Optional: Remove default config if needed
 # RUN rm /etc/nginx/conf.d/default.conf
 
-# Copy build files to NGINX root directory
-COPY --from=build /app/build /usr/share/nginx/html
-
-# OPTIONAL: Add custom nginx.conf here if needed
-# COPY nginx.conf /etc/nginx/conf.d/default.conf
-
-# ✅ FIXED: NGINX uses port 80
-EXPOSE 80
-
-# Start NGINX
-=======
 # Copy the built React app to NGINX's default HTML directory
 COPY --from=build /app/build /usr/share/nginx/html
 
-# Expose correct port (NGINX uses 80)
+# Optional: Add a custom nginx.conf
+# COPY nginx.conf /etc/nginx/conf.d/default.conf
+
+# Expose the default NGINX port
 EXPOSE 80
 
 # Start NGINX in the foreground
->>>>>>> 497e32f7657b3e23dd57cb94b8b143a2ba0e277f
 CMD ["nginx", "-g", "daemon off;"]
